@@ -34,7 +34,7 @@ class StoreProductRequest extends FormRequest
             'name' => 'required',
             'price' => 'required',
             'category_id' => 'required',
-            'media_id' => 'required'
+            'media.*.media_id' => 'nullable|exists:media,id',
 
         ];
     }

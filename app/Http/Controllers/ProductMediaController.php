@@ -43,6 +43,8 @@ class ProductMediaController extends Controller
                 'product_name' => $productImage->product->name,
                 'category_name' => $productImage->product->category->name,
                 'media_id' => $media->id,
+              
+
             ]
         ]);
     }

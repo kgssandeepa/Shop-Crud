@@ -20,8 +20,8 @@ class ProductResource extends JsonResource
             'name'        => $this->name,
             'price'       => $this->price,
             'category_id' => $this->category_id,
-            'media' => ProductMediaResoure::collection($this->media),
-            
+            'media'      => ProductMediaResoure::collection($this->media),
+
             //'media' => ProductMediaResource::collection($this->taskMedia),
 
         ];
