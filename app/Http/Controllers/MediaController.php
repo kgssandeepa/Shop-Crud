@@ -67,8 +67,11 @@ class MediaController extends Controller
 
         return response()->json([
             'message' => 'Multiple File uploaded successfully',
+            'data' => MultipleMediaResource::collection($record)
+
+
             // 'data'=> new MultipleMediaResource($results)
-        ], 200);
+        ],);
     }
 
     // private function verifyAndStore($file, $extension)
@@ -103,7 +106,4 @@ class MediaController extends Controller
             'type'         => $extension,
         ]);
     }
-
-
-    
 }

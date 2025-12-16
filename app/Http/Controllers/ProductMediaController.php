@@ -38,12 +38,10 @@ class ProductMediaController extends Controller
 
         return response()->json([
             'message' => 'Image attached successfully',
-            'data' => [
+            'data' =>
+          [
                 'product_id' => $productImage->product->id,
-                'product_name' => $productImage->product->name,
-                'category_name' => $productImage->product->category->name,
                 'media_id' => $media->id,
-              
 
             ]
         ]);
