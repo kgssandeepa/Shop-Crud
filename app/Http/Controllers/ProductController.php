@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\UpdateProductResource;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,9 +17,19 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
 
+        $medias = $validated['media'];
+        unset($validated['media']);
         $product = Product::create($validated);
 
-        return response()->json([
+        foreach ($medias as $media) {
+         ;
+            ProductImage::create([
+                'product_id' => $product->id,
+                'media_id' => $media['media_id'],
+            ]);
+        }
+        
+         return response()->json([
             'message' => 'product Create Succussfully',
             'data' => new ProductResource($product)
         ], 201);
@@ -48,7 +59,7 @@ class ProductController extends Controller
         $product->delete();
 
         return response()->json([
-            'message' =>'Product Deleted Succuessfully'
-        ],200);
+            'message' => 'Product Deleted Succuessfully'
+        ], 200);
     }
 }

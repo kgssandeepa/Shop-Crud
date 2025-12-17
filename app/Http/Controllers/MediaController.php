@@ -13,6 +13,7 @@ class MediaController extends Controller
 {
 
     protected $imageExtensions  = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
+    
     public function upload(StoreMediaRequest $request)
     {
         //dd('log');
@@ -59,7 +60,7 @@ class MediaController extends Controller
             $extension = strtolower($file->getClientOriginalExtension());
             try {
                 $record = $this->verifyAndStore($file, $extension);
-                $results[] = $record;
+              //  $results[] = $record;
             } catch (\Exception $e) {
                 throw new HttpException(422, $e->getMessage());
             }
@@ -67,7 +68,7 @@ class MediaController extends Controller
 
         return response()->json([
             'message' => 'Multiple File uploaded successfully',
-            'data' => MultipleMediaResource::collection($record)
+          //  'data' => MultipleMediaResource::collection($results)
 
 
             // 'data'=> new MultipleMediaResource($results)

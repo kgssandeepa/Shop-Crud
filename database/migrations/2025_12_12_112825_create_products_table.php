@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('price');
             $table->foreignId('category_id');
-            $table->foreignId('media_id');
+  
 
             $table->foreign('category_id')->references('id')->on('categories')->restrictOnDelete();
-            $table->foreign('media_id')->references('id')->on('media')->restrictOnDelete();
+          
         });
     }
 

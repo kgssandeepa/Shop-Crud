@@ -18,5 +18,4 @@ Route::delete('/products/{product}', [ProductController::class, 'destroy']);
 Route::post('/media/upload', [MediaController::class, 'upload']);
 Route::post('/media/upload-multiple', [MediaController::class, 'uploadMultiple']);
 
-Route::post('/product-media-attach', [ProductMediaController::class, 'attach']);
-//Route::get('/Product-media-attach',[ProductController::class,'index']);
+
