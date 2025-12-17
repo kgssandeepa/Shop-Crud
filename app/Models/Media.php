@@ -17,7 +17,7 @@ class Media extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    // public function getPaths()
+    //public function getPaths()
     // {
     //         $imageSizes = config('common.imagesSizes');
     //         $paths = [];
@@ -31,11 +31,12 @@ class Media extends Model
     //                 $paths[$imageSize['name']] = $path;
     //             }
     //         }
-    //     return $paths;
-    // }
+    //     return $paths;  }
 
     public function getPaths()
 {
     return $this->path;
 }
+
+
 }

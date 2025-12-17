@@ -18,7 +18,7 @@ class MediaResource extends JsonResource
             'id' => $this->id,
             'display_name' => $this->display_name,
             'type' => $this->type,
-            'paths' => $this->getPaths()
+            'paths' => $this->media->getPaths()
             
         ];
     }

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MultipleMediaRequest;
 use App\Models\Media;
+use App\Enums\MediaTypeEnum;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMediaRequest;
+use App\Http\Requests\MultipleMediaRequest;
 use App\Http\Resources\MultipleMediaResource;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -13,6 +14,8 @@ class MediaController extends Controller
 {
 
     protected $imageExtensions  = ['png', 'jpg', 'jpeg', 'svg', 'webp'];
+
+
     
     public function upload(StoreMediaRequest $request)
     {
@@ -65,10 +68,8 @@ class MediaController extends Controller
                 throw new HttpException(422, $e->getMessage());
             }
         }
-
         return response()->json([
             'message' => 'Multiple File uploaded successfully',
-          //  'data' => MultipleMediaResource::collection($results)
 
 
             // 'data'=> new MultipleMediaResource($results)
@@ -107,4 +108,7 @@ class MediaController extends Controller
             'type'         => $extension,
         ]);
     }
+
+
+
 }

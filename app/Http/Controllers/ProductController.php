@@ -26,6 +26,7 @@ class ProductController extends Controller
             ProductImage::create([
                 'product_id' => $product->id,
                 'media_id' => $media['media_id'],
+                
             ]);
         }
         

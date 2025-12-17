@@ -32,7 +32,7 @@ class MultipleMediaRequest extends FormRequest
     {
         return [
             
-            'files' => 'required'
+            'files' => 'required|file|mimes:jpg,png,jpeg,webp|max:2048'
         ];
     }
 }
