@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMediaRequest;
 use App\Http\Requests\MultipleMediaRequest;
 use App\Http\Resources\MultipleMediaResource;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class MediaController extends Controller
@@ -108,7 +109,51 @@ class MediaController extends Controller
             'type'         => $extension,
         ]);
     }
+    
+    private function storeImage($file, $extension )
+    {
+        $originalNameWithExtension = $file->getClientOriginalName();
+        $uniqueFileName = date('Y_m_d_H_i_s') . '_' . uniqid() . '.' . $extension;
+        $directory = 'uploads/' . MediaTypeEnum::IMAGE . '/original';
 
+        // Ensure the directory is created
+        Storage::disk('public')->makeDirectory($directory);
 
+        // Store the file in the specified directory
+        Storage::disk('public')->putFileAs($directory, $file, $uniqueFileName);
 
+        $this->storeImageSizes($file, $uniqueFileName);
+
+        return $this->storeInDatabase($originalNameWithExtension, $uniqueFileName, MediaTypeEnum::IMAGE);
+    }
+
+     private function storeImageSizes($file, $fileName)
+    {
+        // $imageManager = new ImageManager(new Driver());
+        // $uploadedImage = $imageManager->read('public/uploads/images/original/' . $fileName);
+        $imageSizes = config('common.imagesSizes');
+        foreach ($imageSizes as $imageSize) {
+            if (!$imageSize['convertable']) continue;
+
+            $folderName = $imageSize['name'];
+            $directory = 'uploads/' . MediaTypeEnum::IMAGE . '/' . $folderName;
+
+            Storage::disk('public')->makeDirectory($directory);
+            Storage::disk('public')->putFileAs($directory, $file, $fileName);
+            // $uploadedImage->resize(250,250);
+            // $uploadedImage->save('public/uploads/images/' . $folderName);
+            // $encodedImage = Image::make($file);
+            // $encodedImage->save(public_path('public/uploads/images/' . $folderName . '/' . $fileName), $imageSize['quality']);
+        }
+    }
+
+     private function storeInDatabase($displayName, $fileName, $type)
+    {
+        $fileData = [
+            'display_name' => $displayName,
+            'name' => $fileName,
+            'type' => $type
+        ];
+        return([]);
+    }
 }

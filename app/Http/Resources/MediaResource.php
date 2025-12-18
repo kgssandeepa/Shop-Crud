@@ -15,9 +15,9 @@ class MediaResource extends JsonResource
     public function toArray(Request $request): array
     {
        return [
-            'id' => $this->id,
-            'display_name' => $this->display_name,
-            'type' => $this->type,
+            'id' => $this->media->id,
+            'display_name' => $this->media->display_name,
+            'type' => $this->media->type,
             'paths' => $this->media->getPaths()
             
         ];
